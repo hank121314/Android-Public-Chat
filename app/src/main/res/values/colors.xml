@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#ffffff</color>
+    <color name="colorPrimaryDark">#0095ff</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="azure">#00aaff</color>
+    <color name="white">#ffffff</color>
+    <color name="mediumPick">#ff335c</color>
+    <color name="black">#000000</color>
+
+</resources>

@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Public Chat</string>
+    <string name="username_icon">&#xe6b8;</string>
+    <string name="password_icon">&#xe82b;</string>
+    <string name="dashboard_title">&#xe6fb;</string>
+    <string name="profile">&#xe726;</string>
+    <string name="search">&#xe6ac;</string>
+    <string name="calendar">&#xe6bf;</string>
+</resources>

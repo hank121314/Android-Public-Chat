@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources><item name="loginButton" type="id"/> <item name="registerButton" type="id"/><item name="Splash" type="id"/><item name="BoardsList" type="id"/>
+    <item name="addBoard_ImageView" type="id"/><item name="PublicChat" type="id"/> <item name="register_ImageView" type="id"/>
+</resources>
+

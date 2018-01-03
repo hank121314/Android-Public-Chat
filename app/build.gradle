@@ -1,0 +1,60 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+
+
+android {
+    compileSdkVersion 26
+    defaultConfig {
+        applicationId "com.hank121314.hankchen.androidproject"
+        minSdkVersion 24
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    // Anko Commons
+    compile "org.jetbrains.anko:anko-commons:$anko_version"
+
+    // Anko Layouts
+    compile "org.jetbrains.anko:anko-sdk25:$anko_version" // sdk15, sdk19, sdk21, sdk23 are also available
+    compile "org.jetbrains.anko:anko-appcompat-v7:$anko_version"
+
+    // Coroutine listeners for Anko Layouts
+    compile "org.jetbrains.anko:anko-sdk25-coroutines:$anko_version"
+    compile "org.jetbrains.anko:anko-appcompat-v7-coroutines:$anko_version"
+    compile "org.jetbrains.anko:anko-sdk25-listeners:$anko_version"
+    compile "org.jetbrains.anko:anko-coroutines:$anko_version"
+    compile 'com.github.nkzawa:socket.io-client:0.3.0'
+    compile 'io.reactivex.rxjava2:rxkotlin:2.2.0'
+    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    compile 'com.github.d-max:spots-dialog:0.7@aar'
+    compile 'com.joanzapata.iconify:android-iconify-fontawesome:2.2.2'
+    // Because RxAndroid releases are few and far between, it is recommended you also
+    // explicitly depend on RxJava's latest version for bug fixes and new features.
+    compile 'io.reactivex.rxjava2:rxjava:2.1.7'
+    implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    compile 'com.google.code.gson:gson:2.8.2'
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'com.android.support:design:26.1.0'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    compile 'com.facebook.stetho:stetho:1.5.0'
+    compile "org.jetbrains.anko:anko-sqlite:$anko_version"
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+}
+
