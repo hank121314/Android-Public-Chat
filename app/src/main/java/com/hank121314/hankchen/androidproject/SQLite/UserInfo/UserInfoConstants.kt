@@ -13,5 +13,6 @@ interface UserInfoConstants : BaseColumns {
         val USERNAME = "username"
         val PASSWORD = "password"
         val NAME="name"
+        val ADMIN="Administrator"
     }
 }

@@ -49,10 +49,11 @@ class MainActivity_socketDataStream(alert:AlertDialog,activity: AppCompatActivit
             values.put("username",dataValue.get("username").toString())
             values.put("password",dataValue.get("password").toString())
             values.put("name",dataValue.get("name").toString())
+            values.put("Administrator",dataValue.get("Administrator").toString())
             activity.userinfo.writableDatabase.createTable(TABLENAME, true,
                     UserInfoConstants.USERNAME to TEXT,
                     UserInfoConstants.NAME to TEXT,
-                    UserInfoConstants.PASSWORD to TEXT)
+                    UserInfoConstants.PASSWORD to TEXT,UserInfoConstants.ADMIN to TEXT)
             activity.userinfo.writableDatabase.insert(TABLENAME,null,values)
             val intent = Intent(activity, Dashboard::class.java)
             activity.startActivity(intent)

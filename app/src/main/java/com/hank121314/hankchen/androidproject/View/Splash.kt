@@ -59,10 +59,10 @@ class Splash: AppCompatActivity() {
             }
             override fun onAnimationEnd(animation: Animation?) {
                 doAsync{
-                    userinfo.writableDatabase.createTable(TABLENAME,true,
+                    userinfo.writableDatabase.createTable(TABLENAME, true,
                             UserInfoConstants.USERNAME to TEXT,
-                            NAME to TEXT,
-                            UserInfoConstants.PASSWORD to TEXT)
+                            UserInfoConstants.NAME to TEXT,
+                            UserInfoConstants.PASSWORD to TEXT,UserInfoConstants.ADMIN to TEXT)
                     val result = userinfo.readableDatabase.select(TABLENAME)
                     val parser = parseUserInfo()
                     onComplete {

@@ -9,6 +9,8 @@ import com.hank121314.hankchen.androidproject.SQLite.UserInfo.UserInfoConstants.
 import com.hank121314.hankchen.androidproject.SQLite.UserInfo.UserInfoConstants.Companion.USERNAME
 import com.hank121314.hankchen.androidproject.SQLite.UserInfo.UserInfoConstants.Companion.PASSWORD
 import com.hank121314.hankchen.androidproject.SQLite.UserInfo.UserInfoConstants.Companion.NAME
+import com.hank121314.hankchen.androidproject.SQLite.UserInfo.UserInfoConstants.Companion.ADMIN
+
 
 import org.jetbrains.anko.db.*
 
@@ -32,7 +34,9 @@ class UserInfoDB(ctx: Context) : ManagedSQLiteOpenHelper(ctx, "PublicChat", null
         db.createTable(TABLENAME, true,
                 USERNAME to TEXT,
                 NAME to TEXT,
-                PASSWORD to TEXT)
+                PASSWORD to TEXT,
+                ADMIN to TEXT
+            )
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {

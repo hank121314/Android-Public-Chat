@@ -135,9 +135,9 @@ class Profile:Fragment() {
             if (fetched == false) {
                 doAsync {
                     (activity as Dashboard).userinfo.writableDatabase.createTable(UserInfoConstants.TABLENAME, true,
-                            UserInfoConstants.USERNAME to TEXT,
-                            UserInfoConstants.NAME to TEXT,
-                            UserInfoConstants.PASSWORD to TEXT)
+                    UserInfoConstants.USERNAME to TEXT,
+                    UserInfoConstants.NAME to TEXT,
+                    UserInfoConstants.PASSWORD to TEXT,UserInfoConstants.ADMIN to TEXT)
                     result = (activity as Dashboard).userinfo.readableDatabase.select(UserInfoConstants.TABLENAME)
                     onComplete {
                         val parser = parseUserInfo()
