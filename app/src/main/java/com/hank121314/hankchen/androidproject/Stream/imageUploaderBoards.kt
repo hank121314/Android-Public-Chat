@@ -5,9 +5,11 @@ import java.net.URL
 import android.graphics.Bitmap
 import com.hank121314.hankchen.androidproject.services.socket
 import io.reactivex.ObservableEmitter
+import com.github.nkzawa.global.Global.encodeURIComponent
 import io.reactivex.ObservableOnSubscribe
 import org.jetbrains.anko.doAsync
 import java.io.*
+
 
 
 
@@ -17,7 +19,7 @@ import java.io.*
  */
 class imageUploaderBoards(img: Bitmap, filename:String):ObservableOnSubscribe<String> {
     var attachmentName = "file"
-    var attachmentFileName = "${filename}.jpeg"
+    var attachmentFileName = encodeURIComponent("${filename}.jpeg")
     var crlf = "\r\n"
     var twoHyphens = "--"
     var boundary = "*****"

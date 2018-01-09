@@ -3,6 +3,7 @@ package com.hank121314.hankchen.androidproject.Stream
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.support.v7.app.AppCompatActivity
+import com.github.nkzawa.global.Global.encodeURIComponent
 import com.hank121314.hankchen.androidproject.services.socket
 import io.reactivex.ObservableEmitter
 import io.reactivex.ObservableOnSubscribe
@@ -10,7 +11,10 @@ import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.onComplete
 import java.io.*
 import java.net.HttpURLConnection
+import java.net.HttpURLConnection.HTTP_BAD_REQUEST
 import java.net.URL
+import java.nio.charset.Charset
+import java.nio.charset.StandardCharsets
 
 /**
  * Created by hankchen on 2017/12/26.
@@ -18,7 +22,7 @@ import java.net.URL
 class imageDownloaderBoards(activity:AppCompatActivity, fileName:String):ObservableOnSubscribe<String> {
     val str =fileName.split("-")
     val self=activity
-    var attachmentFileName =str[0]
+    var attachmentFileName =encodeURIComponent(str[0])
     var boundary = "*****"
     val downloadServer= URL("${socket.server_siete}/download/boardsPhoto")
     val connection=downloadServer.openConnection() as HttpURLConnection
@@ -34,12 +38,16 @@ class imageDownloaderBoards(activity:AppCompatActivity, fileName:String):Observa
         doAsync{
             connection.setRequestProperty("touch",false.toString())
             val serverFile = BufferedInputStream(connection.inputStream)
+            if (connection.responseCode >= HTTP_BAD_REQUEST) {
+                e.onError(throw FileNotFoundException(downloadServer.toString()));
+            }
             val responseStreamReader = BufferedReader(InputStreamReader(serverFile))
             val stringBuilder = StringBuilder()
             responseStreamReader.lines().forEach {s-> stringBuilder.append(s).append("\n") }
             responseStreamReader.close()
             val serverFileName = stringBuilder.toString()
             serverFile.close()
+            val error =  connection.errorStream
             connection.disconnect()
             val localFile = File("${self.filesDir.absoluteFile}/boardsImage/${serverFileName}.jpeg").exists()
             if(localFile==true) {

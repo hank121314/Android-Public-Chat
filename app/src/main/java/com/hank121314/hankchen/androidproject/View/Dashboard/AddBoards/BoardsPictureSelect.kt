@@ -38,6 +38,7 @@ class BoardsPictureSelect:AppCompatActivity(){
         val height = displayMetrics.heightPixels-800
         super.onCreate(savedInstanceState)
         val self =this
+        this.title="Select Image"
         verticalLayout {
             setGravity(Gravity.CENTER)
             imageView {
@@ -70,7 +71,7 @@ class BoardsPictureSelect:AppCompatActivity(){
                 onClick {
                     val intent=Intent(self,Named_Boards::class.java)
                     val stream = ByteArrayOutputStream()
-                    model.bindImage.item.compress(Bitmap.CompressFormat.JPEG, 100, stream)
+                    model.bindImage.item.compress(Bitmap.CompressFormat.JPEG, 50, stream)
                     val byteArray = stream.toByteArray()
                     intent.putExtra("image",byteArray)
                     startActivity(intent)

@@ -44,9 +44,11 @@ class ListAdapter(context: Context, itemList: List<Map<String, String>>):BaseAda
         val titleView = v.findViewById(R.id.titleView) as TextView
         val txtView = v.findViewById(R.id.createdView) as TextView
         val imageView = v.findViewById(R.id.imageView) as ImageView
+        val countView=v.findViewById(R.id.countView) as TextView
         val file = File(mItemList!!.get(position)["image"].toString())
         titleView.text = mItemList!!.get(position)["boards"].toString()
         txtView.text = mItemList!!.get(position)["created"].toString()
+        countView.text= "User:${mItemList!!.get(position)["userCount"].toString()}"
         imageView.imageBitmap = BitmapFactory.decodeFile(file.path)
         return v
     }

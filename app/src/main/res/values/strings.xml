@@ -1,9 +1,17 @@
 <resources>
     <string name="app_name">Public Chat</string>
-    <string name="username_icon">&#xe6b8;</string>
-    <string name="password_icon">&#xe82b;</string>
-    <string name="dashboard_title">&#xe6fb;</string>
-    <string name="profile">&#xe726;</string>
-    <string name="search">&#xe6ac;</string>
-    <string name="calendar">&#xe6bf;</string>
+    <string name="username_icon" translatable="false">&#xe6b8;</string>
+    <string name="password_icon" translatable="false">&#xe82b;</string>
+    <string name="dashboard_title" translatable="false">&#xe6fb;</string>
+    <string name="profile" translatable="false">&#xe726;</string>
+    <string name="search" translatable="false">&#xe6ac;</string>
+    <string name="calendar" translatable="false">&#xe6bf;</string>
+    <string name="email" translatable="false">&#xe69f;</string>
+    <string name="correct" translatable="false">&#xe6ad;</string>
+    <string name="refresh" translatable="false">&#xe6aa;</string>
+    <string name="add" translatable="false">&#xe6b9;</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
 </resources>

@@ -14,28 +14,39 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".View.Splash" android:noHistory="true"
-                  android:theme="@style/AppTheme.NoActionBar">
+                  android:theme="@style/AppTheme.NoActionBar"
+                  android:configChanges="keyboardHidden|orientation|screenSize"
+
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".View.MainActivity">
+        <activity android:name=".View.MainActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            >
         </activity>
-        <activity android:name=".View.Register">
+        <activity android:name=".View.Register"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            >
         </activity>
         <activity android:name=".View.Dashboard.Dashboard"
-                  android:noHistory="true"
-                  android:theme="@style/AppTheme.NoActionBar">
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity android:name=".View.Dashboard.AddBoards.BoardsPictureSelect"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            >
         </activity>
         <activity android:name=".View.Dashboard.AddBoards.Named_Boards"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            >
         </activity>
-        <activity android:name=".View.PublicChat.PublicChatRoom" android:windowSoftInputMode="adjustPan">
+        <activity android:name=".View.PublicChat.PublicChatRoom" android:windowSoftInputMode="adjustPan"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            >
         </activity>
     </application>
 

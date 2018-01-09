@@ -94,12 +94,15 @@ class Register_VM(activity: AppCompatActivity, buidler: AlertDialog,bitmap: Bitm
         val dataValue =data.asJsonObject.get("fulfillmentValue").asJsonObject.get("data").asJsonObject
         val single = Observable.create(imageUploaderUser(bitmap, "${dataValue.get("username").toString()}-${Date().time}"))
         single.subscribe { s->
+            println(s)
+            println(dataValue)
             val values = ContentValues()
             values.put("username",dataValue.get("username").toString())
             values.put("password",dataValue.get("password").toString())
-            values.put("password",dataValue.get("name").toString())
+            values.put("name",dataValue.get("name").toString())
             activity.userinfo.writableDatabase.createTable(UserInfoConstants.TABLENAME, true,
                     UserInfoConstants.USERNAME to TEXT,
+                    UserInfoConstants.NAME to TEXT,
                     UserInfoConstants.PASSWORD to TEXT)
             activity.userinfo.writableDatabase.insert(UserInfoConstants.TABLENAME,null,values)
             buidler.dismiss()

@@ -1,23 +1,24 @@
 package com.hank121314.hankchen.androidproject.View.Dashboard.Adapter
 
 
-import android.content.res.Resources
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentPagerAdapter
+import android.support.v4.app.FragmentStatePagerAdapter
 import android.support.v7.app.AppCompatActivity
 import com.hank121314.hankchen.androidproject.R
 import com.hank121314.hankchen.androidproject.View.Dashboard.Pager.BoardList
+import com.hank121314.hankchen.androidproject.View.Dashboard.Pager.Profile
 import com.hank121314.hankchen.androidproject.View.Dashboard.Pager.SearchBoard
 
-
-class PageAdapter(fragmentManager:FragmentManager,activity: AppCompatActivity): FragmentPagerAdapter(fragmentManager) {
+class PageAdapter(fragmentManager:FragmentManager,activity: AppCompatActivity): FragmentStatePagerAdapter(fragmentManager) {
     val activity=activity
+    val fragmentManager = fragmentManager
     override fun getItem(position: Int): Fragment {
         when(position){
             0 -> return BoardList()
             1 -> return SearchBoard()
-            else -> return BoardList()
+            2 -> return Profile()
+            else->return BoardList()
         }
     }
 

@@ -29,9 +29,6 @@ class SearchBoard: Fragment() {
                     textAlignment = View.TEXT_ALIGNMENT_CENTER
                     typeface = iconfont
                 }
-                button("Logout") {
-                    onClick { Dashboard_VM().onLogOut((activity as Dashboard)) }
-                }
             }
         }.view
     }

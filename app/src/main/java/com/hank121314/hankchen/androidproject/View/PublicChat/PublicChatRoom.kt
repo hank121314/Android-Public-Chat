@@ -1,30 +1,25 @@
 package com.hank121314.hankchen.androidproject.View.PublicChat
 
-import android.content.Intent
+import android.content.Context
 import android.graphics.Typeface
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.support.v7.app.AppCompatActivity
+import android.text.SpannableStringBuilder
 import android.util.DisplayMetrics
 import android.view.Gravity
-import android.view.View
-import android.widget.ListAdapter
 import android.widget.ListView
 import com.hank121314.hankchen.androidproject.Modal.Binder
 import com.hank121314.hankchen.androidproject.Modal.chatRoomModel
 import com.hank121314.hankchen.androidproject.R
 import com.hank121314.hankchen.androidproject.SQLite.UserInfo.UserInfoConstants
-import com.hank121314.hankchen.androidproject.SQLite.UserInfo.userInfo
+import com.hank121314.hankchen.androidproject.SQLite.UserInfo.parseUserInfo
 import com.hank121314.hankchen.androidproject.SQLite.UserInfo.userinfo
 import com.hank121314.hankchen.androidproject.Stream.RPC
 import com.hank121314.hankchen.androidproject.Stream.listener
 import com.hank121314.hankchen.androidproject.Stream.sender
-import com.hank121314.hankchen.androidproject.View.Dashboard.AddBoards.BoardsPictureSelect
-import com.hank121314.hankchen.androidproject.View.Dashboard.Dashboard
-import com.hank121314.hankchen.androidproject.View.MainActivity
 import com.hank121314.hankchen.androidproject.ViewModal.FetchingMessage
 import com.hank121314.hankchen.androidproject.ViewModal.sendingMessage
-import com.hank121314.hankchen.androidproject.helper.LargeBitmap
+import com.hank121314.hankchen.androidproject.components.ProgressDialog
 import io.reactivex.Observable
 import org.jetbrains.anko.*
 import org.jetbrains.anko.db.*
@@ -32,6 +27,15 @@ import org.jetbrains.anko.sdk25.listeners.onClick
 import org.jetbrains.anko.sdk25.listeners.textChangedListener
 import org.json.JSONObject
 import java.util.*
+import android.content.Context.INPUT_METHOD_SERVICE
+import android.view.View
+import android.view.inputmethod.InputMethodManager
+import com.hank121314.hankchen.androidproject.ViewModal.sendingMessageLocal
+import kotlin.collections.HashMap
+import android.widget.TextView
+
+
+
 
 /**
  * Created by hankchen on 2018/1/2.
@@ -40,8 +44,12 @@ class PublicChatRoom:AppCompatActivity (){
     lateinit var model: chatRoomModel
     lateinit var result:SelectQueryBuilder
     var listData= arrayListOf<Map<String,String>>()
+    lateinit var listview:PublicListAdapter
+    lateinit var listView:ListView
     override fun onCreate(savedInstanceState: Bundle?) {
-        model= chatRoomModel(Binder(""),Binder(true))
+        listview=PublicListAdapter(this,listData)
+        model= chatRoomModel(Binder(""),Binder(HashMap<String,String>()),Binder(true))
+        val self=this
         doAsync {
             userinfo.writableDatabase.createTable(UserInfoConstants.TABLENAME, true,
                 UserInfoConstants.USERNAME to TEXT,
@@ -63,18 +71,32 @@ class PublicChatRoom:AppCompatActivity (){
                 button{
                     text="send"
                     onClick {
-                        val parser = org.jetbrains.anko.db.rowParser { username: String, password: String -> Pair(username, password) }
+                        val parser = parseUserInfo()
                         val room = intent.getStringExtra("boardsName")
+                        val item=HashMap<String,String>()
+                        val timestamp="${Date().time}"
+                        val username=result.parseList(parser).toList()[0].first.toString()
+                        val name=result.parseList(parser).toList()[0].second.toString()
+                        val id =UUID.randomUUID()
+                        item.put("boards", room)
+                        item.put("timestamp", Date(timestamp.toLong()).toLocaleString())
+                        item.put("user",name)
+                        item.put("image", username)
+                        item.put("message", model.bindText.item)
+                        item.put("sent",false.toString())
+                        model.sending.item=item
+                        listData.add(item)
+                        listview.notifyDataSetChanged()
                         val param = JSONObject()
                         val obj = JSONObject()
                         obj.put("room", room)
-                        obj.put("send", result.parseList(parser).toList()[0].first)
-                        obj.put("timestamp", "${Date().time}")
+                        obj.put("send", username)
+                        obj.put("user",name )
+                        obj.put("timestamp", timestamp)
                         obj.put("message",model.bindText.item)
-                        model.bindText.item=""
-                        message.setText(model.bindText.item)
                         param.put("parm", obj)
                         sender().rpc("sendMessage",param)
+                        message.text=SpannableStringBuilder("")
                     }
                 }
             }
@@ -89,8 +111,11 @@ class PublicChatRoom:AppCompatActivity (){
 
     override fun onStart() {
         super.onStart()
+        val buidler = ProgressDialog().dialog(this,"Loading...").create()
+        buidler.show()
+        val self=this
         val room=intent.getStringExtra("boardsName")
-        val listView=findViewById<ListView>(R.id.PublicChat)
+        listView=findViewById<ListView>(R.id.PublicChat)
         listView.setTranscriptMode(ListView.TRANSCRIPT_MODE_NORMAL);
         listView.setStackFromBottom(true);
         val param=JSONObject()
@@ -102,9 +127,15 @@ class PublicChatRoom:AppCompatActivity (){
         val fetchMessage=RPC("fetchMessage",param)
         val joinRoomStream=Observable.create(joinRoom)
         val fetchMessageStream=Observable.create(fetchMessage)
+        joinRoomStream.subscribe{ _ ->fetchMessageStream.subscribe(FetchingMessage(listView,self,buidler))}
         val inputStream = Observable.create(listener("sendMessageResponse"))
-        inputStream.subscribe(sendingMessage(listView, this))
-        joinRoomStream.subscribe{ _ ->fetchMessageStream.subscribe(FetchingMessage(listView,this))}
+        inputStream.subscribe(sendingMessageLocal(listView, self))
+    }
+
+    override fun onResume() {
+        super.onResume()
+        listView.adapter=listview
+        listview.notifyDataSetChanged()
     }
 
     override fun onStop() {
@@ -116,5 +147,11 @@ class PublicChatRoom:AppCompatActivity (){
         param.put("parm", obj)
         val leave=Observable.create(RPC("leaveChatRoom",param))
         leave.subscribe()
+    }
+
+    fun updateView(index: Int) {
+        val v = listView.getChildAt(index - listView.getFirstVisiblePosition()) ?: return
+        val someText = v.findViewById(R.id.createdView) as TextView
+        someText.text = "Hi! I updated you manually!"
     }
 }

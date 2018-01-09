@@ -30,6 +30,7 @@ import com.hank121314.hankchen.androidproject.unBind
 import io.reactivex.Observable
 import org.jetbrains.anko.*
 import org.jetbrains.anko.sdk25.listeners.onClick
+import org.jetbrains.anko.sdk25.listeners.textChangedListener
 import org.json.JSONObject
 import java.util.*
 
@@ -45,7 +46,7 @@ class Register:AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val iconfont = Typeface.createFromAsset(assets, "iconfont.ttf")
         this.title="Register"
-        val buidler = ProgressDialog().dialog(this,"Logging!!").create()
+        val buidler = ProgressDialog().dialog(this,"Registering...").create()
         val displayMetrics = DisplayMetrics()
         windowManager.defaultDisplay.getMetrics(displayMetrics)
         val height = displayMetrics.heightPixels-1200
@@ -55,33 +56,6 @@ class Register:AppCompatActivity() {
             verticalLayout {
                 gravity=Gravity.CENTER
                 padding = dip(40)
-                val alert = alert {
-                    customView {
-                        verticalLayout {
-                            textView {
-                                text = "Choose Image Source"
-                                textSize = 24f
-                            }.lparams() {
-                                bottomMargin = 30
-                            }
-                            linearLayout {
-                                gravity = Gravity.CENTER
-                                button("album") {
-                                    onClick {
-                                        val intent = Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-                                        startActivityForResult(intent, ACTION_ALBUM_REQUEST_CODE)
-                                    }
-                                }
-                                button("Camera") {
-                                    onClick {
-                                        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-                                        startActivityForResult(intent, ACTION_CAMERA_REQUEST_CODE)
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
                 val userImage = imageView {
                     id = R.id.register_ImageView
                     bind(model.bindOn) {
@@ -101,6 +75,8 @@ class Register:AppCompatActivity() {
                 val name = editText {
                     singleLine = true
                     hint = "Name"
+                    textChangedListener { onTextChanged { charSequence, p1, p2, p3 -> model.name.item = "$charSequence" } }
+
                 }
                 textView {
                     textSize = 22f
@@ -110,6 +86,7 @@ class Register:AppCompatActivity() {
                 val username = editText {
                     singleLine = true
                     hint = "e-mail"
+                    textChangedListener { onTextChanged { charSequence, p1, p2, p3 -> model.username.item = "$charSequence" } }
                 }.lparams(width = matchParent) {
                     topMargin = 20
                 }
@@ -123,6 +100,7 @@ class Register:AppCompatActivity() {
                 val password = editText {
                     hint = "password"
                     inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+                    textChangedListener { onTextChanged { charSequence, p1, p2, p3 -> model.password.item = "$charSequence" } }
                 }.lparams(width = matchParent) {
                     topMargin = 20
                 }
@@ -136,14 +114,31 @@ class Register:AppCompatActivity() {
                 val birthDay = editText {
                     singleLine = true
                     hint = "birthDay"
+                    textChangedListener { onTextChanged { charSequence, p1, p2, p3 -> model.birthDay.item = "$charSequence" } }
                 }.lparams(width = matchParent) {
                     topMargin = 20
                 }
-                button("Selct Avatar") {
-                    backgroundResource=R.drawable.register_button
+                button("album") {
+                    backgroundResource = R.drawable.register_button
+                    textSize = 18f
+                    textColor = Color.WHITE
                     onClick {
-                        alert.show()
+                        val intent = Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+                        startActivityForResult(intent, ACTION_ALBUM_REQUEST_CODE)
                     }
+                }.lparams(width = matchParent) {
+                    topMargin = 20
+                }
+                button("Camera") {
+                    backgroundResource = R.drawable.register_button
+                    textSize = 18f
+                    textColor = Color.WHITE
+                    onClick {
+                        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+                        startActivityForResult(intent, ACTION_CAMERA_REQUEST_CODE)
+                    }
+                }.lparams(width = matchParent) {
+                    topMargin = 20
                 }
                 button("Submit") {
                     id = R.id.loginButton
@@ -173,9 +168,11 @@ class Register:AppCompatActivity() {
         val image=findViewById<ImageView>(R.id.register_ImageView)
     }
     fun displayImage(display: Bitmap){
-        val rounded = RoundedBitmapDrawableFactory.create(this.resources,display)
+        val bit = LargeBitmap().decodeSampledBitmapFromBitmap(resources,display,0.3f,0.3f)
+        val rounded = RoundedBitmapDrawableFactory.create(this.resources,bit)
         model.image.item=rounded
         model.image.item.cornerRadius=200F
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

@@ -19,7 +19,7 @@ import java.util.Date
  * Created by hankchen on 2017/12/27.
  */
 class onSumbitBoards(bmp:Bitmap,boradName:String,activity:AppCompatActivity) {
-    val buidler = ProgressDialog().dialog(activity,"Logging!!").create()
+    val buidler = ProgressDialog().dialog(activity,"Creating!!").create()
 
     val bmp=bmp
     val boradName=boradName

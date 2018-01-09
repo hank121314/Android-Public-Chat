@@ -8,12 +8,15 @@ import android.database.sqlite.SQLiteDatabase;
 import com.hank121314.hankchen.androidproject.SQLite.UserInfo.UserInfoConstants.Companion.TABLENAME
 import com.hank121314.hankchen.androidproject.SQLite.UserInfo.UserInfoConstants.Companion.USERNAME
 import com.hank121314.hankchen.androidproject.SQLite.UserInfo.UserInfoConstants.Companion.PASSWORD
+import com.hank121314.hankchen.androidproject.SQLite.UserInfo.UserInfoConstants.Companion.NAME
+
 import org.jetbrains.anko.db.*
 
 
 class UserInfoDB(ctx: Context) : ManagedSQLiteOpenHelper(ctx, "PublicChat", null, 1) {
     companion object {
-        private var instance: UserInfoDB? = null
+        private var instance: UserInfoDB?
+                = null
 
         @Synchronized
         fun getInstance(ctx: Context): UserInfoDB {
@@ -28,6 +31,7 @@ class UserInfoDB(ctx: Context) : ManagedSQLiteOpenHelper(ctx, "PublicChat", null
         // Here you create tables
         db.createTable(TABLENAME, true,
                 USERNAME to TEXT,
+                NAME to TEXT,
                 PASSWORD to TEXT)
     }
 

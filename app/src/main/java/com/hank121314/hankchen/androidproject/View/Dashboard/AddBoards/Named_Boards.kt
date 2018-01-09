@@ -26,6 +26,7 @@ class Named_Boards:AppCompatActivity(){
         val height = displayMetrics.heightPixels-800
         super.onCreate(savedInstanceState)
         val self=this
+        this.title="Name Board"
         verticalLayout {
             setGravity(Gravity.CENTER)
             imageView {

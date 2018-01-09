@@ -23,13 +23,6 @@ class Dashboard :AppCompatActivity(){
     private lateinit var viewPager:ViewPager
     private lateinit var adapter: PageAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
-        Stetho.initialize(
-                Stetho.newInitializerBuilder(this)
-                        .enableDumpapp(
-                                Stetho.defaultDumperPluginsProvider(this))
-                        .enableWebKitInspector(
-                                Stetho.defaultInspectorModulesProvider(this))
-                        .build())
         super.onCreate(savedInstanceState)
         setContentView(R.layout.dashboard)
         setupView()
@@ -51,11 +44,10 @@ class Dashboard :AppCompatActivity(){
     private fun setupView() {
         // adapter
         adapter = PageAdapter(supportFragmentManager, this)
-
         // viewPager
         viewPager = findViewById(R.id.layout_main_viewPager)
         viewPager.adapter = adapter
-
+        viewPager.offscreenPageLimit=3
         // tabLayout
         tabLayout = findViewById(R.id.layout_main_tabLayout)
         tabLayout.setupWithViewPager(viewPager)
