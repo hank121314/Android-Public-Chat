@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">公開聊天</string>
+    <string name="username">帳戶名</string>
+    <string name="password">密碼</string>
+    <string name="login">登入</string>
+    <string name="register">註冊</string>
+    <string name="board">看板</string>
+    <string name="Add">新增</string>
+    <string name="Refresh">重整</string>
+    <string name="downloading">下載必要檔案...</string>
+    <string name="Profile">個人資料</string>
+    <string name="Name">姓名</string>
+    <string name="Birth">生日</string>
+    <string name="Logout">登出</string>
+    <string name="Warn">警告</string>
+    <string name="NetworkErr">網路未連接</string>
+    <string name="logging">登入中</string>
+    <string name="emailinvaild">無效的e-mail</string>
+    <string name="inputCorrectLogin">請輸入正確的帳號及密碼</string>
+    <string name="inputEmpty">輸入為空</string>
+    <string name="inputvalidEmail">請輸入正確的郵件地址</string>
+    <string name="birthDayinValid">無效的生日(日/月/年)</string>
+    <string name="inputBirthvalidate">請輸入正確的生日</string>
+    <string name="newBoardonError">請輸入看板的新名稱</string>
+    <string name="creating">新增中...</string>
+    <string name="boardsSelect">選擇圖片</string>
+    <string name="album">相簿</string>
+    <string name="camera">相機</string>
+    <string name="submit">提交</string>
+    <string name="nameBoard">命名看板</string>
+    <string name="name">名稱</string>
+    <string name="loading">讀取中...</string>
+    <string name="inputsth">輸入...</string>
+    <string name="send">送出</string>
+</resources>

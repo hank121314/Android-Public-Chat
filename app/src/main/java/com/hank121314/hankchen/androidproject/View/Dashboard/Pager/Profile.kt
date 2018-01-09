@@ -48,7 +48,7 @@ class Profile:Fragment() {
                 verticalLayout {
                     gravity = Gravity.CENTER_HORIZONTAL
                     textView {
-                        text = "${resources.getString(R.string.profile)} Profiles"
+                        text = "${resources.getString(R.string.profile)} ${resources.getString(R.string.Profile)}"
                         textSize = 48f
                         textAlignment = View.TEXT_ALIGNMENT_CENTER
                         typeface = iconfont
@@ -61,7 +61,7 @@ class Profile:Fragment() {
                         topMargin = 50
                     }
                     textView {
-                        text = "${resources.getString(R.string.username_icon)} Name"
+                        text = "${resources.getString(R.string.username_icon)} ${resources.getString(R.string.Name)}"
                         textSize = 24f
                         textAlignment = View.TEXT_ALIGNMENT_TEXT_START
                         typeface = iconfont
@@ -76,7 +76,7 @@ class Profile:Fragment() {
                         topMargin = 20
                     }
                     textView {
-                        text = "${resources.getString(R.string.email)} Username"
+                        text = "${resources.getString(R.string.email)} ${resources.getString(R.string.username)}"
                         textSize = 24f
                         textAlignment = View.TEXT_ALIGNMENT_TEXT_START
                         typeface = iconfont
@@ -91,7 +91,7 @@ class Profile:Fragment() {
                         topMargin = 20
                     }
                     textView {
-                        text = "${resources.getString(R.string.calendar)} Birthday"
+                        text = "${resources.getString(R.string.calendar)} ${resources.getString(R.string.Birth)}"
                         textSize = 24f
                         textAlignment = View.TEXT_ALIGNMENT_TEXT_START
                         typeface = iconfont
@@ -105,7 +105,7 @@ class Profile:Fragment() {
                     }.lparams() {
                         topMargin = 20
                     }
-                    button("Refresh${resources.getString(R.string.refresh)}") {
+                    button("${resources.getString(R.string.Refresh)}${resources.getString(R.string.refresh)}") {
                         transformationMethod = null
                         backgroundResource = R.drawable.add_boards
                         typeface = iconfont
@@ -116,7 +116,7 @@ class Profile:Fragment() {
                     }.lparams(width = 300) {
                         topMargin = 20
                     }
-                    button("Logout") {
+                    button("${resources.getString(R.string.Logout)}") {
                         backgroundResource = R.drawable.register_button
                         onClick { Dashboard_VM().onLogOut((activity as Dashboard)) }
                     }.lparams(width = 300) {

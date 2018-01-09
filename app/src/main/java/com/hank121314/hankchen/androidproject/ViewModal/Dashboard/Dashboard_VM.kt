@@ -2,6 +2,7 @@ package com.hank121314.hankchen.androidproject.ViewModal.Dashboard
 
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
+import com.hank121314.hankchen.androidproject.R
 import com.hank121314.hankchen.androidproject.SQLite.UserInfo.UserInfoConstants
 import com.hank121314.hankchen.androidproject.SQLite.UserInfo.userinfo
 import com.hank121314.hankchen.androidproject.View.MainActivity
@@ -16,7 +17,7 @@ import org.jetbrains.anko.uiThread
  */
 class Dashboard_VM {
     fun onLogOut(activity: AppCompatActivity){
-        val progress = ProgressDialog().dialog(activity,"Log Out...").create()
+        val progress = ProgressDialog().dialog(activity,activity.resources.getString(R.string.Logout)).create()
         progress.show()
         doAsync {
             val result= activity.userinfo.writableDatabase.dropTable(UserInfoConstants.TABLENAME)

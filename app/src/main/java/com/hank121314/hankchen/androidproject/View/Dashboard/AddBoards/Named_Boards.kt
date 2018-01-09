@@ -26,7 +26,7 @@ class Named_Boards:AppCompatActivity(){
         val height = displayMetrics.heightPixels-800
         super.onCreate(savedInstanceState)
         val self=this
-        this.title="Name Board"
+        this.title=resources.getString(R.string.nameBoard)
         verticalLayout {
             setGravity(Gravity.CENTER)
             imageView {
@@ -35,17 +35,17 @@ class Named_Boards:AppCompatActivity(){
             }.lparams(width = matchParent, height = height)
             textView{
                 textSize=22f
-                text="${resources.getString(R.string.dashboard_title)} Board name"
+                text="${resources.getString(R.string.dashboard_title)} ${resources.getString(R.string.board)} ${resources.getString(R.string.name)}"
                 typeface=iconfont
             }
             val boradName = editText{
-                hint = "Board name"
+                hint = "${resources.getString(R.string.board)} ${resources.getString(R.string.name)}"
                 textSize = 20f
                 singleLine=true
             }.lparams(width= matchParent){
                 topMargin=20
             }
-            button("Submit") {
+            button(resources.getString(R.string.submit)) {
                 id= R.id.loginButton
                 textSize = 18f
                 textColor= Color.WHITE

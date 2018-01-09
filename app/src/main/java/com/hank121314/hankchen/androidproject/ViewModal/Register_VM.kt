@@ -6,11 +6,13 @@ import android.graphics.Bitmap
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import com.google.gson.JsonParser
+import com.hank121314.hankchen.androidproject.R
 import com.hank121314.hankchen.androidproject.SQLite.UserInfo.UserInfoConstants
 import com.hank121314.hankchen.androidproject.SQLite.UserInfo.userinfo
 import com.hank121314.hankchen.androidproject.Stream.RPC
 import com.hank121314.hankchen.androidproject.Stream.imageUploaderUser
 import com.hank121314.hankchen.androidproject.View.Dashboard.Dashboard
+import com.hank121314.hankchen.androidproject.helper.NetWorkError
 import com.hank121314.hankchen.androidproject.helper.Validation
 import io.reactivex.Observable
 import io.reactivex.Observer
@@ -28,12 +30,7 @@ import java.util.*
  */
 class Register_onPress(){
     fun onRegister(activity: AppCompatActivity, buidler: AlertDialog,bitmap: Bitmap,param:JSONObject) {
-        val networkError=activity.alert("NetWork Error!") {
-            title = "Warning"
-            yesButton { activity.toast("Please Input right name and password")
-                buidler.dismiss()
-            }
-        }
+        NetWorkError().show(activity,{})
         val username = param.getJSONObject("parm").get("username").toString()
         val password = param.getJSONObject("parm").get("password").toString()
         val name = param.getJSONObject("parm").get("name").toString()
@@ -41,27 +38,26 @@ class Register_onPress(){
         val arr=arrayOf<String>(username,password,birth,name)
         if(Validation().validateEmpty(arr)){
             buidler.dismiss()
-            activity.alert("input Fields is Empty") {
-                title = "Warning"
-                yesButton { activity.toast("Please Input all fields")
-                }
+            activity.alert(activity.resources.getString(R.string.inputEmpty)) {
+                title = activity.resources.getString(R.string.Warn)
+                yesButton {}
             }.show()
             return;
         }
         if(Validation().validateEmail(username)){
             buidler.dismiss()
-            activity.alert("E-mail invalid") {
-                title = "Warning"
-                yesButton { activity.toast("Please Input validate e-mail address")
+            activity.alert(activity.resources.getString(R.string.emailinvaild)) {
+                title = activity.resources.getString(R.string.Warn)
+                yesButton { activity.toast(activity.resources.getString(R.string.inputvalidEmail))
                 }
             }.show()
             return;
         }
         if(Validation().validateBirth(birth)){
             buidler.dismiss()
-            activity.alert("BirthDay invalid(dd/mm/yyyy)") {
-                title = "Warning"
-                yesButton { activity.toast("Please Input validate e-mail address")
+            activity.alert(activity.resources.getString(R.string.birthDayinValid)) {
+                title = activity.resources.getString(R.string.Warn)
+                yesButton { activity.toast(activity.resources.getString(R.string.inputBirthvalidate))
                 }
             }.show()
             return;
@@ -82,8 +78,8 @@ class Register_VM(activity: AppCompatActivity, buidler: AlertDialog,bitmap: Bitm
         buidler.dismiss()
         val message = e.toString().replace("java.lang.Throwable:","")
         activity.alert(message) {
-            title="Warning"
-            yesButton { activity.toast("Please input new Boards name") }
+            title= activity.resources.getString(R.string.Warn)
+            yesButton { activity.toast(activity.resources.getString(R.string.newBoardonError)) }
         }.show()
         return;
     }

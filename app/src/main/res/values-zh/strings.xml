@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">公開聊天</string>
-    <string name="username">帳戶名</string>
-    <string name="password">密碼</string>
-    <string name="login">登入</string>
-    <string name="register">登出</string>
+    <string name="nameBoard">命名看板</string>
+    <string name="name">名稱</string>
+    <string name="loading">讀取中...</string>
+    <string name="inputsth">輸入...</string>
+    <string name="send">送出</string>
 </resources>

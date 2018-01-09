@@ -65,11 +65,12 @@ class PublicChatRoom:AppCompatActivity (){
             linearLayout {
                 gravity=Gravity.BOTTOM
                 val message = editText {
-                    hint="Input some Messages"
+                    hint=resources.getString(R.string.inputsth)
                     textChangedListener { onTextChanged { charSequence, p1, p2, p3 -> model.bindText.item = "$charSequence" } }
                 }.lparams(width=widthPix-300)
                 button{
-                    text="send"
+                    backgroundResource=R.drawable.add_boards
+                    text=resources.getString(R.string.send)
                     onClick {
                         val parser = parseUserInfo()
                         val room = intent.getStringExtra("boardsName")
@@ -77,7 +78,6 @@ class PublicChatRoom:AppCompatActivity (){
                         val timestamp="${Date().time}"
                         val username=result.parseList(parser).toList()[0].first.toString()
                         val name=result.parseList(parser).toList()[0].second.toString()
-                        val id =UUID.randomUUID()
                         item.put("boards", room)
                         item.put("timestamp", Date(timestamp.toLong()).toLocaleString())
                         item.put("user",name)
@@ -111,7 +111,7 @@ class PublicChatRoom:AppCompatActivity (){
 
     override fun onStart() {
         super.onStart()
-        val buidler = ProgressDialog().dialog(this,"Loading...").create()
+        val buidler = ProgressDialog().dialog(this,resources.getString(R.string.loading)).create()
         buidler.show()
         val self=this
         val room=intent.getStringExtra("boardsName")
@@ -149,9 +149,4 @@ class PublicChatRoom:AppCompatActivity (){
         leave.subscribe()
     }
 
-    fun updateView(index: Int) {
-        val v = listView.getChildAt(index - listView.getFirstVisiblePosition()) ?: return
-        val someText = v.findViewById(R.id.createdView) as TextView
-        someText.text = "Hi! I updated you manually!"
-    }
 }

@@ -19,6 +19,7 @@ import org.jetbrains.anko.toast
 import org.jetbrains.anko.yesButton
 import org.json.JSONObject
 import android.content.ContentValues
+import com.hank121314.hankchen.androidproject.R
 import com.hank121314.hankchen.androidproject.SQLite.UserInfo.UserInfoConstants
 import com.hank121314.hankchen.androidproject.SQLite.UserInfo.UserInfoConstants.Companion.TABLENAME
 import com.hank121314.hankchen.androidproject.SQLite.UserInfo.userinfo
@@ -62,8 +63,8 @@ class MainActivity_socketDataStream(alert:AlertDialog,activity: AppCompatActivit
             alert.dismiss()
             val message = e.toString().replace("java.lang.Throwable:","")
             activity.alert(message) {
-                title="Warning"
-                yesButton { activity.toast("Please input correct Username and Password") }
+                title=activity.resources.getString(R.string.Warn)
+                yesButton { activity.toast(activity.resources.getString(R.string.inputCorrectLogin)) }
             }.show()
             return;
         }
@@ -76,28 +77,28 @@ class MainActivity_socketDataStream(alert:AlertDialog,activity: AppCompatActivit
 class MainActivity_onPress{
     val socketIO= socket()
     fun authenticate(username:String,password:String,activity: AppCompatActivity) {
-        val buidler = ProgressDialog().dialog(activity,"Logging!!").create()
+        val buidler = ProgressDialog().dialog(activity,activity.resources.getString(R.string.logging)).create()
         val param = JSONObject()
         val obj = JSONObject()
-        val networkError=activity.alert("NetWork Error!") {
-            title = "Warning"
-            yesButton { activity.toast("Please Input right name and password")
+        val networkError=activity.alert(activity.resources.getString(R.string.NetworkErr)) {
+            title = activity.resources.getString(R.string.Warn)
+            yesButton {
                 buidler.dismiss()
             }
         }
         val arr=arrayOf<String>(username,password)
         if(Validation().validateEmpty(arr)){
-            activity.alert("input Fields is Empty") {
-                title = "Warning"
-                yesButton { activity.toast("Please Input e-mail address and password")
+            activity.alert(activity.resources.getString(R.string.inputEmpty)) {
+                title =  activity.resources.getString(R.string.Warn)
+                yesButton { activity.toast(activity.resources.getString(R.string.inputCorrectLogin))
                 }
             }.show()
             return;
         }
         if(Validation().validateEmail(username)){
-            activity.alert("E-mail invalid") {
-                title = "Warning"
-                yesButton { activity.toast("Please Input validate e-mail address")
+            activity.alert(activity.resources.getString(R.string.emailinvaild)) {
+                title =  activity.resources.getString(R.string.Warn)
+                yesButton { activity.toast(activity.resources.getString(R.string.inputCorrectLogin))
                 }
             }.show()
             return;

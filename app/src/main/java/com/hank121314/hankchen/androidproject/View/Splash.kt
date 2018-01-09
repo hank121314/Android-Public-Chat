@@ -41,7 +41,7 @@ class Splash: AppCompatActivity() {
             gravity=Gravity.CENTER
             textView{
                 id=R.id.Splash
-                text="${resources.getString(R.string.app_name)}"
+                text=resources.getString(R.string.app_name)
                 textSize=48f
                 textAlignment= View.TEXT_ALIGNMENT_CENTER
             }

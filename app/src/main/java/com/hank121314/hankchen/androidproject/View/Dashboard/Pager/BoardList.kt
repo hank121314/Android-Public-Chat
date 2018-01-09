@@ -38,12 +38,12 @@ class BoardList:Fragment() {
             verticalLayout {
                 linearLayout {
                     textView {
-                        text = "${resources.getString(R.string.dashboard_title)} Boards"
+                        text = "${resources.getString(R.string.dashboard_title)} ${resources.getString(R.string.board)}"
                         textSize = 48f
                         textAlignment = View.TEXT_ALIGNMENT_CENTER
                         typeface = iconfont
                     }
-                    button("Add${resources.getString(R.string.add)}") {
+                    button("${resources.getString(R.string.Add)}${resources.getString(R.string.add)}") {
                         transformationMethod=null
                         backgroundResource=R.drawable.add_boards
                         typeface = iconfont
@@ -58,13 +58,13 @@ class BoardList:Fragment() {
                     adapter= ListAdapter(activity, arr)
                 }
                 list.addFooterView(UI {
-                    button("Refresh${resources.getString(R.string.refresh)}") {
+                    button("${resources.getString(R.string.Refresh)} ${resources.getString(R.string.refresh)}") {
                         transformationMethod = null
                         backgroundResource = R.drawable.add_boards
                         typeface = iconfont
                         onClick {
                             socket.connect()
-                            val alert = ProgressDialog().dialog(this.context,"Downloading Necessary File...").create()
+                            val alert = ProgressDialog().dialog(this.context,resources.getString(R.string.downloading)).create()
                             val parm = JSONObject()
                             parm.put("parm", "")
                             val rpc = RPC("getBoards", parm)
@@ -81,7 +81,7 @@ class BoardList:Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         if(null == savedInstanceState) {
-            val alert = ProgressDialog().dialog(this.context,"Downloading Necessary File...").create()
+            val alert = ProgressDialog().dialog(this.context,resources.getString(R.string.downloading)).create()
             alert.show()
             NetWorkError().show(activity as Dashboard,{alert.dismiss()})
             val parm = JSONObject()

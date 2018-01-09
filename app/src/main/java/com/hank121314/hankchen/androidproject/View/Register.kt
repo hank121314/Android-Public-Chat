@@ -45,7 +45,7 @@ class Register:AppCompatActivity() {
         model= registerModel(Binder(""),Binder(""),Binder(""),Binder(""),Binder(RoundedBitmapDrawableFactory.create(this.resources,LargeBitmap().decodeSampledBitmapFromResource(this.applicationContext.resources,R.drawable.wood1,100,100))),Binder(true))
         super.onCreate(savedInstanceState)
         val iconfont = Typeface.createFromAsset(assets, "iconfont.ttf")
-        this.title="Register"
+        this.title=resources.getString(R.string.register)
         val buidler = ProgressDialog().dialog(this,"Registering...").create()
         val displayMetrics = DisplayMetrics()
         windowManager.defaultDisplay.getMetrics(displayMetrics)
@@ -69,36 +69,36 @@ class Register:AppCompatActivity() {
                 }
                 textView {
                     textSize = 22f
-                    text = "${resources.getString(R.string.profile)}Name"
+                    text = "${resources.getString(R.string.profile)} ${resources.getString(R.string.Name)}"
                     typeface = iconfont
                 }
                 val name = editText {
                     singleLine = true
-                    hint = "Name"
+                    hint = "${resources.getString(R.string.Name)}"
                     textChangedListener { onTextChanged { charSequence, p1, p2, p3 -> model.name.item = "$charSequence" } }
 
                 }
                 textView {
                     textSize = 22f
-                    text = "${resources.getString(R.string.username_icon)}Username"
+                    text = "${resources.getString(R.string.username_icon)} ${resources.getString(R.string.username)}"
                     typeface = iconfont
                 }
                 val username = editText {
                     singleLine = true
-                    hint = "e-mail"
+                    hint = "${resources.getString(R.string.username)}"
                     textChangedListener { onTextChanged { charSequence, p1, p2, p3 -> model.username.item = "$charSequence" } }
                 }.lparams(width = matchParent) {
                     topMargin = 20
                 }
                 textView {
                     textSize = 22f
-                    text = "${resources.getString(R.string.password_icon)}Password"
+                    text = "${resources.getString(R.string.password_icon)} ${resources.getString(R.string.password)}"
                     typeface = iconfont
                 }.lparams(width = matchParent) {
                     topMargin = 70
                 }
                 val password = editText {
-                    hint = "password"
+                    hint = "${resources.getString(R.string.password)}"
                     inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
                     textChangedListener { onTextChanged { charSequence, p1, p2, p3 -> model.password.item = "$charSequence" } }
                 }.lparams(width = matchParent) {
@@ -106,19 +106,19 @@ class Register:AppCompatActivity() {
                 }
                 textView {
                     textSize = 22f
-                    text = "${resources.getString(R.string.calendar)}BirthDay"
+                    text = "${resources.getString(R.string.calendar)} ${resources.getString(R.string.Birth)}"
                     typeface = iconfont
                 }.lparams(width = matchParent) {
                     topMargin = 70
                 }
                 val birthDay = editText {
                     singleLine = true
-                    hint = "birthDay"
+                    hint = "${resources.getString(R.string.Birth)}"
                     textChangedListener { onTextChanged { charSequence, p1, p2, p3 -> model.birthDay.item = "$charSequence" } }
                 }.lparams(width = matchParent) {
                     topMargin = 20
                 }
-                button("album") {
+                button("${resources.getString(R.string.album)}") {
                     backgroundResource = R.drawable.register_button
                     textSize = 18f
                     textColor = Color.WHITE
@@ -129,7 +129,7 @@ class Register:AppCompatActivity() {
                 }.lparams(width = matchParent) {
                     topMargin = 20
                 }
-                button("Camera") {
+                button("${resources.getString(R.string.camera)}") {
                     backgroundResource = R.drawable.register_button
                     textSize = 18f
                     textColor = Color.WHITE
@@ -140,7 +140,7 @@ class Register:AppCompatActivity() {
                 }.lparams(width = matchParent) {
                     topMargin = 20
                 }
-                button("Submit") {
+                button("${resources.getString(R.string.submit)}") {
                     id = R.id.loginButton
                     textSize = 18f
                     textColor = Color.WHITE

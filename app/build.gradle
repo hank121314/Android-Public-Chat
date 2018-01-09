@@ -11,6 +11,7 @@ android {
     defaultConfig {
         applicationId "com.hank121314.hankchen.androidproject"
         minSdkVersion 24
+        resConfigs 'zh-rTW', 'en'
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"

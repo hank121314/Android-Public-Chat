@@ -13,11 +13,10 @@ import com.hank121314.hankchen.androidproject.Modal.Binder
 import com.hank121314.hankchen.androidproject.Modal.loginModel
 import com.hank121314.hankchen.androidproject.R
 import com.hank121314.hankchen.androidproject.ViewModal.MainActivity_onPress
-import com.hank121314.hankchen.androidproject.components.ProgressDialog
 import org.jetbrains.anko.sdk25.listeners.textChangedListener
 
 class MainActivity : AppCompatActivity() {
-    val socketIO=socket();
+    val socketIO=socket()
     lateinit var model:loginModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -78,9 +77,4 @@ class MainActivity : AppCompatActivity() {
             }.lparams(width= matchParent,height = matchParent)
         }
     }
-
-    companion object {
-        private val TAG = MainActivity::class.java.simpleName
-    }
-
 }

@@ -4,6 +4,7 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
+import com.hank121314.hankchen.androidproject.R
 import com.hank121314.hankchen.androidproject.Stream.RPC
 import com.hank121314.hankchen.androidproject.View.Dashboard.Dashboard
 import com.hank121314.hankchen.androidproject.Stream.imageUploaderBoards
@@ -19,7 +20,7 @@ import java.util.Date
  * Created by hankchen on 2017/12/27.
  */
 class onSumbitBoards(bmp:Bitmap,boradName:String,activity:AppCompatActivity) {
-    val buidler = ProgressDialog().dialog(activity,"Creating!!").create()
+    val buidler = ProgressDialog().dialog(activity,activity.resources.getString(R.string.creating)).create()
 
     val bmp=bmp
     val boradName=boradName
@@ -48,8 +49,8 @@ class onUploadComplete(activity: AppCompatActivity,buidler:AlertDialog):Observer
         buidler.dismiss()
         val message = e.toString().replace("java.lang.Throwable:","")
         activity.alert(message) {
-            title="Warning"
-            yesButton { activity.toast("Please input new Boards name") }
+            title=activity.resources.getString(R.string.Warn)
+            yesButton { activity.toast(activity.resources.getString(R.string.newBoardonError)) }
         }.show()
         return;
     }

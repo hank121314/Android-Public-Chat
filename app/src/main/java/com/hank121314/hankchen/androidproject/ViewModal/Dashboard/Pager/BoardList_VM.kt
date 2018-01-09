@@ -67,8 +67,8 @@ class FetchingBoards(adapter:ListView,activity:AppCompatActivity,alert: AlertDia
         alert.dismiss()
         val message = e.toString().replace("java.lang.Throwable:","")
         activity.alert(message) {
-            title="Warning"
-            yesButton { activity.toast("Please input correct Username and Password") }
+            title=activity.resources.getString(R.string.Warn)
+            yesButton {}
         }.show()
         return;
     }

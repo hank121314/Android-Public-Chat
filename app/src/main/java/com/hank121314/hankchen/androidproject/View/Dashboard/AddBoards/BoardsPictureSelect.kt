@@ -38,7 +38,7 @@ class BoardsPictureSelect:AppCompatActivity(){
         val height = displayMetrics.heightPixels-800
         super.onCreate(savedInstanceState)
         val self =this
-        this.title="Select Image"
+        this.title=resources.getString(R.string.boardsSelect)
         verticalLayout {
             setGravity(Gravity.CENTER)
             imageView {
@@ -50,14 +50,14 @@ class BoardsPictureSelect:AppCompatActivity(){
                     }
                 }
             }.lparams(width = matchParent, height = height)
-            button("Album") {
+            button(resources.getString(R.string.album)) {
                 backgroundResource = R.drawable.login_button
                 onClick {
                     val intent = Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
                     startActivityForResult(intent, ACTION_ALBUM_REQUEST_CODE)
                 }
             }.lparams(width = matchParent)
-            button("Camera") {
+            button(resources.getString(R.string.camera)) {
                 backgroundResource = R.drawable.login_button
                 onClick {
                     val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
@@ -66,7 +66,7 @@ class BoardsPictureSelect:AppCompatActivity(){
             }.lparams(width = matchParent) {
                 topMargin = 30
             }
-            button("Sumbit") {
+            button(resources.getString(R.string.submit)) {
                 backgroundResource = R.drawable.register_button
                 onClick {
                     val intent=Intent(self,Named_Boards::class.java)
@@ -82,7 +82,8 @@ class BoardsPictureSelect:AppCompatActivity(){
         }
     }
     fun displayImage(display:Bitmap){
-        model.bindImage.item=display
+        val bit = LargeBitmap().decodeSampledBitmapFromBitmap(resources, display,0.3f,0.3f)
+        model.bindImage.item=bit
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
