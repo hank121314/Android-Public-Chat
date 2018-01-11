@@ -14,6 +14,8 @@ import java.io.*
 
 
 
+
+
 /**
  * Created by hankchen on 2017/12/26.
  */
@@ -50,6 +52,21 @@ class imageUploaderBoards(img: Bitmap, filename:String):ObservableOnSubscribe<St
                 request.writeBytes(crlf)
                 request.writeBytes(twoHyphens + boundary +
                         twoHyphens + crlf)
+                val totalSize = byteArray.size
+                val os = connection.getOutputStream()
+                var bytesTransferred = 0
+                val chunkSize = 2000
+                while (bytesTransferred < totalSize) {
+                    var nextChunkSize = totalSize - bytesTransferred
+                    if (nextChunkSize > chunkSize) {
+                        nextChunkSize = chunkSize
+                    }
+                    os.write(byteArray, bytesTransferred, nextChunkSize) // TODO check outcome!
+                    bytesTransferred += nextChunkSize
+                // Here you can call the method which updates progress
+                // be sure to wrap it so UI-updates are done on the main thread!
+                    println(100 * bytesTransferred / totalSize);
+                }
                 request.flush()
                 request.close()
                 val responseStream = BufferedInputStream(connection.inputStream)

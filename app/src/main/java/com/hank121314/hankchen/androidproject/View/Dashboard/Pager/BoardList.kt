@@ -80,8 +80,9 @@ class BoardList:Fragment() {
                         backgroundResource = R.drawable.add_boards
                         typeface = iconfont
                         onClick {
-                            socket.connect()
                             val alert = ProgressDialog().dialog(this.context,resources.getString(R.string.downloading)).create()
+                            socket.connect()
+                            alert.show()
                             val parm = JSONObject()
                             parm.put("parm", "")
                             val rpc = RPC("getBoards", parm)

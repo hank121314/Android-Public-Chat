@@ -91,20 +91,27 @@ class Register_VM(activity: AppCompatActivity, buidler: AlertDialog,bitmap: Bitm
         val single = Observable.create(imageUploaderUser(bitmap, "${dataValue.get("username").toString()}-${Date().time}"))
         single.subscribe { s->
             println(s)
-            println(dataValue)
-            val values = ContentValues()
-            values.put("username",dataValue.get("username").toString())
-            values.put("password",dataValue.get("password").toString())
-            values.put("name",dataValue.get("name").toString())
-            values.put("Administrator",dataValue.get("Administrator").toString())
-            activity.userinfo.writableDatabase.createTable(UserInfoConstants.TABLENAME, true,
-                    UserInfoConstants.USERNAME to TEXT,
-                    UserInfoConstants.NAME to TEXT,
-                    UserInfoConstants.PASSWORD to TEXT,UserInfoConstants.ADMIN to TEXT)
-            activity.userinfo.writableDatabase.insert(UserInfoConstants.TABLENAME,null,values)
-            buidler.dismiss()
-            val intent = Intent(activity, Dashboard::class.java)
-            activity.startActivity(intent)
+            if(Validation().validateNumber(s)) {
+                activity.runOnUiThread{
+                    buidler.setTitle(s)
+                }
+            }
+            else {
+                println(dataValue)
+                val values = ContentValues()
+                values.put("username", dataValue.get("username").toString())
+                values.put("password", dataValue.get("password").toString())
+                values.put("name", dataValue.get("name").toString())
+                values.put("Administrator", dataValue.get("Administrator").toString())
+                activity.userinfo.writableDatabase.createTable(UserInfoConstants.TABLENAME, true,
+                        UserInfoConstants.USERNAME to TEXT,
+                        UserInfoConstants.NAME to TEXT,
+                        UserInfoConstants.PASSWORD to TEXT, UserInfoConstants.ADMIN to TEXT)
+                activity.userinfo.writableDatabase.insert(UserInfoConstants.TABLENAME, null, values)
+                buidler.dismiss()
+                val intent = Intent(activity, Dashboard::class.java)
+                activity.startActivity(intent)
+            }
         }
     }
 

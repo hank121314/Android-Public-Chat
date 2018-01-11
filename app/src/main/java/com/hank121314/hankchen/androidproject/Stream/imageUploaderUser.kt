@@ -47,9 +47,21 @@ class imageUploaderUser(img: Bitmap, filename:String): ObservableOnSubscribe<Str
             val byteArray = byteArrayOutputStream.toByteArray()
             request.write(byteArray)
             request.writeBytes(crlf)
-
             request.writeBytes(twoHyphens + boundary +
                     twoHyphens + crlf)
+            val totalSize = byteArray.size
+            var bytesTransferred = 0
+            val chunkSize = 2000
+            while (bytesTransferred < totalSize) {
+                var nextChunkSize = totalSize - bytesTransferred
+                if (nextChunkSize > chunkSize) {
+                    nextChunkSize = chunkSize
+                }
+                bytesTransferred += nextChunkSize
+                // Here you can call the method which updates progress
+                // be sure to wrap it so UI-updates are done on the main thread!
+                e.onNext((100 * bytesTransferred / totalSize).toString())
+            }
             request.flush()
             request.close()
             val responseStream = BufferedInputStream(connection.inputStream)

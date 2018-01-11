@@ -46,7 +46,7 @@ class FetchingMessage(adapter: ListView, activity: PublicChatRoom,alert:AlertDia
                         val boards = dataValue[i] as JsonObject
                         val item = HashMap<String, String>()
                         var room = boards.get("room").asString
-                        var timestamp = Date(boards.get("timestamp").asLong).toLocaleString()
+                        var timestamp = boards.get("timestamp").asString
                         var send = boards.get("send").asString
                         var message = boards.get("message").asString
                         var user = boards.get("user").asString
@@ -59,7 +59,7 @@ class FetchingMessage(adapter: ListView, activity: PublicChatRoom,alert:AlertDia
                             item.put("message", message)
                             item.put("sent",true.toString())
                             activity.listData.add(item)
-                            activity.listData.sortBy { it["timestamp"] }
+                            activity.listData.sortBy { it["timestamp"]!!.toLong() }
                             if (k == dataValue.size() - 1) {
                                 activity.listview = PublicListAdapter(activity, activity.listData)
                                 adapter.adapter = activity.listview
@@ -75,7 +75,7 @@ class FetchingMessage(adapter: ListView, activity: PublicChatRoom,alert:AlertDia
                         val boards = name as JsonObject
                         val item = HashMap<String, String>()
                         var room = boards.get("room").asString
-                        var timestamp = Date(boards.get("timestamp").asLong).toLocaleString()
+                        var timestamp =boards.get("timestamp").asString
                         var send = boards.get("send").asString
                         var message = boards.get("message").asString
                         var user = boards.get("user").asString
@@ -88,7 +88,7 @@ class FetchingMessage(adapter: ListView, activity: PublicChatRoom,alert:AlertDia
                             item.put("message", message)
                             item.put("sent",true.toString())
                             activity.listData.add(item)
-                            activity.listData.sortBy { it["timestamp"] }
+                            activity.listData.sortBy { it["timestamp"]!!.toLong() }
                             if(i==dataValue.size()-1) {
                                 activity.listview = PublicListAdapter(activity, activity.listData)
                                 adapter.adapter = activity.listview
@@ -125,7 +125,7 @@ class sendingMessageLocal(adapter: ListView, activity: PublicChatRoom): Observer
         val boards = dataValue as JsonObject
         val item : MutableMap<String,String> = mutableMapOf()
         var room = boards.get("room").asString
-        var timestamp = Date(boards.get("timestamp").asLong).toLocaleString()
+        var timestamp = boards.get("timestamp").asString
         var send = boards.get("send").asString
         var message = boards.get("message").asString
         var user = boards.get("user").asString

@@ -168,8 +168,8 @@ class Register:AppCompatActivity() {
         val image=findViewById<ImageView>(R.id.register_ImageView)
     }
     fun displayImage(display: Bitmap){
-        val bit = LargeBitmap().decodeSampledBitmapFromBitmap(resources,display,0.3f,0.3f)
-        val rounded = RoundedBitmapDrawableFactory.create(this.resources,bit)
+//        val bit = LargeBitmap().decodeSampledBitmapFromBitmap(resources,display,0.3f,0.3f)
+        val rounded = RoundedBitmapDrawableFactory.create(this.resources,display)
         model.image.item=rounded
         model.image.item.cornerRadius=200F
 

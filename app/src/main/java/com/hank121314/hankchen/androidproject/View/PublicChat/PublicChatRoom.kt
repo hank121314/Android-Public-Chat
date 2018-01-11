@@ -33,8 +33,7 @@ import android.view.inputmethod.InputMethodManager
 import com.hank121314.hankchen.androidproject.ViewModal.sendingMessageLocal
 import kotlin.collections.HashMap
 import android.widget.TextView
-
-
+import java.sql.Timestamp
 
 
 /**
@@ -79,7 +78,7 @@ class PublicChatRoom:AppCompatActivity (){
                         val username=result.parseList(parser).toList()[0].first.toString()
                         val name=result.parseList(parser).toList()[0].second.toString()
                         item.put("boards", room)
-                        item.put("timestamp", Date(timestamp.toLong()).toLocaleString())
+                        item.put("timestamp", Timestamp(System.currentTimeMillis()).time.toString())
                         item.put("user",name)
                         item.put("image", username)
                         item.put("message", model.bindText.item)

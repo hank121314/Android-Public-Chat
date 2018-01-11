@@ -21,6 +21,7 @@ import org.jetbrains.anko.imageBitmap
 import org.jetbrains.anko.onComplete
 import org.jetbrains.anko.uiThread
 import java.io.File
+import java.sql.Date
 import kotlin.math.round
 
 /**
@@ -90,9 +91,9 @@ class PublicListAdapter(context: Context, itemList: ArrayList<Map<String, String
         }
         holder.userView!!.text = mItemList!!.get(position)["user"].toString()
         holder.titleView!!.text = mItemList!!.get(position)["message"].toString()
-        holder.txtView!!.text=mItemList!!.get(position)["timestamp"]!!.toString()
+        holder.txtView!!.text= Date(mItemList!!.get(position)["timestamp"]!!.toLong()).toLocaleString()
         if(mItemList!!.get(position)["sent"].toString()==true.toString()) {
-            holder.txtView!!.text="${mItemList!!.get(position)["timestamp"]!!.toString()} ${context.resources.getString(R.string.correct)}"
+            holder.txtView!!.text="${Date(mItemList!!.get(position)["timestamp"]!!.toLong()).toLocaleString()} ${context.resources.getString(R.string.correct)}"
         }
         return v
     }
