@@ -6,12 +6,10 @@ import android.support.design.widget.TabLayout
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
 import android.widget.TextView
-import com.facebook.stetho.Stetho
 import com.hank121314.hankchen.androidproject.R
 import com.hank121314.hankchen.androidproject.services.socket
 import android.view.ViewGroup
 import com.hank121314.hankchen.androidproject.View.Dashboard.Adapter.PageAdapter
-import com.hank121314.hankchen.androidproject.View.MainActivity
 
 
 /**
